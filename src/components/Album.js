@@ -94,7 +94,7 @@ const Album = () => {
       <CssBaseline />
       <main>
         {/* Hero unit */}
-        <div className={classes.heroContent}>
+        {/* <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography
               component="h6"
@@ -105,7 +105,7 @@ const Album = () => {
             >
               Latest mementors
             </Typography>
-            {/* <div className={classes.heroButtons}>
+            <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
                   <Button variant="contained" color="primary">
@@ -118,9 +118,9 @@ const Album = () => {
                   </Button>
                 </Grid>
               </Grid>
-            </div> */}
+            </div>
           </Container>
-        </div>
+        </div> */}
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
@@ -142,9 +142,9 @@ const Album = () => {
                     </Typography> */}
                   </CardContent>
                   <CardActions>
-                    <Button onClick={(e) => setCurrentMeme(card.id, card.name, card.url)} size="small" color="primary">
+                    {/* <Button onClick={(e) => setCurrentMeme(card.id, card.name, card.url)} size="small" color="primary">
                       View
-                    </Button>
+                    </Button> */}
                     <Button onClick={(e) => editCurrentMeme(card.id, card.name, card.url)} size="small" color="primary">
                       Edit
                     </Button>
