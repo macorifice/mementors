@@ -46,6 +46,9 @@ const NewMeme = (props) => {
       display: 'block',
       width: '100%',
       height: 'auto'
+    },
+    input: {
+      color: "#FFFFFF"
     }
   }));
   
@@ -61,22 +64,30 @@ const NewMeme = (props) => {
         <img className={classes.image} style={{height: 400, width: 400}} src={`${props.image}`}></img>
         </Grid>
         <Grid item xs={6}>
-        <TextField style={{top: 30, right: 120}}
+        <TextField style={{top: 280, right: 120}}
+        InputProps={{
+          className: classes.input
+        }}
               required
               error
               variant='outlined'
               id="bottomText"
+              placeholder="Bottom Text"
               name="bottomText"
             />
-        <TextField style={{top: 280, right: 120}}
+        <TextField style={{top: 30, right: 120}}
+        InputProps={{
+          className: classes.input
+        }}
               required
               error
               variant='outlined'
               id="topText"
+              placeholder="Top text"
               name="topText"
             />
         </Grid>
-        <Grid item xs={3}>
+        {/* <Grid item xs={3}>
           <Paper className={classes.paper}>xs=3</Paper>
         </Grid>
         <Grid item xs={3}>
@@ -87,7 +98,7 @@ const NewMeme = (props) => {
         </Grid>
         <Grid item xs={3}>
           <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
+        </Grid> */}
       </Grid>
     </div>
         
