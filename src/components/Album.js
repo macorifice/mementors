@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import axios from "axios";
+import ViewMeme from './ViewMeme'
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -53,7 +54,13 @@ const Album = () => {
   const classes = useStyles();
 
   const [state, setstate] = useState([]);
+  const [current, setcurrent] = useState();
+  const [view, setview] = useState(false);
 
+  const onClose = () => {
+    setview(false)
+  }
+  
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
@@ -66,10 +73,14 @@ const Album = () => {
     fetchData();
   }, []);
 
+  const setCurrentMeme = (template_id, template_name, template_url) => {
+      setcurrent(template_id+'-'+template_name+'-'+template_url)
+      setview(true)
+  }
+
   return (
     <React.Fragment>
       <CssBaseline />
-      {console.log(state)}
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
@@ -81,7 +92,7 @@ const Album = () => {
               color="textPrimary"
               gutterBottom
             >
-              Last mementors
+              Latest mementors
             </Typography>
             {/* <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
@@ -114,13 +125,13 @@ const Album = () => {
                     <Typography gutterBottom variant="h5" component="h2">
                       {card.name}
                     </Typography>
-                    <Typography>
+                    {/* <Typography>
                       This is a media card. You can use this section to describe
                       the content.
-                    </Typography>
+                    </Typography> */}
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
+                    <Button onClick={(e) => setCurrentMeme(card.id, card.name, card.url)} size="small" color="primary">
                       View
                     </Button>
                     <Button size="small" color="primary">
@@ -130,6 +141,7 @@ const Album = () => {
                 </Card>
               </Grid>
             ))}
+            { view && <ViewMeme view={view} onClose={onClose} current={current} ></ViewMeme>}
           </Grid>
         </Container>
       </main>
