@@ -13,6 +13,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Switch from "@material-ui/core/Switch";
 import axios from "axios";
+import NewMeme from './NewMeme'
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -32,22 +33,6 @@ const useStyles = makeStyles((theme) => ({
 
 const MaxWidthDialog = (props) => {
   const [state, setstate] = useState();
-  useEffect(() => {
-    const fetchData = async () => {
-    //   const result = await axios.post(
-    //       `https://imgflip.com/memegenerator/${props.current.split("-")[0]}/${
-    //         props.current.split("-")[1]
-    //       }`
-    //   );
-    const result = await axios.post(
-        `https://imgflip.com/memegenerator/14859329/Charlie-Sheen-DERP`
-    );
-      //   setstate(result.data.data.memes);
-      console.log(result);
-    };
-
-    fetchData();
-  }, []);
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -81,10 +66,11 @@ const MaxWidthDialog = (props) => {
       >
         <DialogTitle id="max-width-dialog-title">{props.current.split("-")[1]}</DialogTitle>
         <DialogContent>
-          <img src={props.current.split("-")[2]}></img>
+          {/* <img src={props.current.split("-")[2]}></img> */}
+          <NewMeme image={props.current.split("-")[2]}></NewMeme>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={props.onClose} color="primary">
             Close
           </Button>
         </DialogActions>

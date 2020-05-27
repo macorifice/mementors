@@ -6,8 +6,8 @@ import Album from './components/Album'
 import logo from './assets/logo_transparent.png'
 
 const sections = [
-  { title: 'Generator', url: '#' },
-  { title: 'Your mementors', url: '#' }
+  // { title: 'Create your mementor', url: '#' },
+  // { title: 'Your mementors', url: '#' }
 ];
 
 const mainFeaturedPost = {

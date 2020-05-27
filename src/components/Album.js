@@ -15,6 +15,7 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import axios from "axios";
 import ViewMeme from './ViewMeme'
+import EditMeme from './EditMeme'
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -56,9 +57,14 @@ const Album = () => {
   const [state, setstate] = useState([]);
   const [current, setcurrent] = useState();
   const [view, setview] = useState(false);
+  const [edit, setedit] = useState(false);
 
   const onClose = () => {
     setview(false)
+  }
+
+  const onEditClose = () => {
+    setedit(false)
   }
   
   useEffect(() => {
@@ -78,6 +84,11 @@ const Album = () => {
       setview(true)
   }
 
+  const editCurrentMeme = (template_id, template_name, template_url) => {
+    setcurrent(template_id+'-'+template_name+'-'+template_url)
+    setedit(true)
+}
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -86,8 +97,8 @@ const Album = () => {
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography
-              component="h1"
-              variant="h2"
+              component="h6"
+              variant="h6"
               align="center"
               color="textPrimary"
               gutterBottom
@@ -134,7 +145,7 @@ const Album = () => {
                     <Button onClick={(e) => setCurrentMeme(card.id, card.name, card.url)} size="small" color="primary">
                       View
                     </Button>
-                    <Button size="small" color="primary">
+                    <Button onClick={(e) => editCurrentMeme(card.id, card.name, card.url)} size="small" color="primary">
                       Edit
                     </Button>
                   </CardActions>
@@ -142,6 +153,7 @@ const Album = () => {
               </Grid>
             ))}
             { view && <ViewMeme view={view} onClose={onClose} current={current} ></ViewMeme>}
+            { edit && <EditMeme view={edit} onClose={onEditClose} current={current} ></EditMeme>}
           </Grid>
         </Container>
       </main>

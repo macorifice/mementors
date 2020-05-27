@@ -84,7 +84,7 @@ const MaxWidthDialog = (props) => {
           <img src={props.current.split("-")[2]}></img>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={props.onClose} color="primary">
             Close
           </Button>
         </DialogActions>
