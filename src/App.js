@@ -3,6 +3,7 @@ import Header from './components/Header'
 import MainFeaturedPost from './components/MainFeaturedPost'
 import Footer from './components/Footer'
 import Album from './components/Album'
+import logo from './assets/logo_transparent.png'
 
 const sections = [
   { title: 'Generator', url: '#' },
@@ -20,7 +21,7 @@ const mainFeaturedPost = {
 function App() {
   return (
     <>
-    <Header title="Mementor" sections={sections}></Header>
+    <Header title={<img style={{width: 120, height: 120}} src={logo}></img>} sections={sections}></Header>
     <MainFeaturedPost post={mainFeaturedPost} />
     <Album></Album>
     <Footer></Footer>
