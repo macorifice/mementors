@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header'
+import MainFeaturedPost from './components/MainFeaturedPost'
+import Footer from './components/Footer'
+import Album from './components/Album'
+
+const sections = [
+  { title: 'Generator', url: '#' },
+  { title: 'Your mementors', url: '#' }
+];
+
+const mainFeaturedPost = {
+  title: `Generate your mementor, it's free!`,
+  description:
+    "A few simple steps to generate your mementor",
+  image: 'https://source.unsplash.com/random',
+  imgText: 'main image description'
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Header title="Mementor" sections={sections}></Header>
+    <MainFeaturedPost post={mainFeaturedPost} />
+    <Album></Album>
+    <Footer></Footer>
+    </>
   );
 }
 
