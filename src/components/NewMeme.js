@@ -191,6 +191,7 @@ const NewMeme = (props) => {
                       // file is the actual file object to send
                       const formData = new FormData();
                       formData.append('upload_preset','ml_default');
+                      formData.append('folder','/mementor/upload_images');
                       formData.append('file', file);
                       const request = new XMLHttpRequest();
                       request.open("POST", "https://api.cloudinary.com/v1_1/toowaste-com/upload");
@@ -208,6 +209,9 @@ const NewMeme = (props) => {
                         if (request.status >= 200 && request.status < 300) {
                           // the load method accepts either a string (id) or an object
                           load(request.responseText);
+                          console.log(JSON.parse(request.responseText).url)
+                          setsrc(JSON.parse(request.responseText).url)
+                          setfilepond(false)
                         } else {
                           // Can call the error method if something is wrong, should exit after
                           error("oh no");

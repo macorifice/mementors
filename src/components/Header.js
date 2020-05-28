@@ -75,5 +75,5 @@ export default function Header(props) {
 
 Header.propTypes = {
   sections: PropTypes.array,
-  title: PropTypes.string,
+  title: PropTypes.any,
 };
