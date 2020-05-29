@@ -22,16 +22,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Draggable from "react-draggable";
 import Image from "react-image-resizer";
 import Button from "@material-ui/core/Button";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import InstagramIcon from "@material-ui/icons/Instagram";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import LinkedInIcon from "@material-ui/icons/LinkedIn";
-import PinterestIcon from "@material-ui/icons/Pinterest";
+import Share from "./Share";
+
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 // Our app
 const NewMeme = (props) => {
+  
   const [insertbottomtext, setinsertbottomtext] = useState(false);
   const [inserttoptext, setinserttoptext] = useState(false);
 
@@ -68,6 +66,7 @@ const NewMeme = (props) => {
       padding: theme.spacing(2),
       textAlign: "center",
       color: theme.palette.text.secondary,
+      boxShadow: "none"
     },
     container: {
       position: "relative",
@@ -87,6 +86,8 @@ const NewMeme = (props) => {
   const [src, setsrc] = useState(props.image);
   const [files, setfiles] = useState();
   const [filepond, setfilepond] = useState(false);
+  const [shareurl, setshareurl] = useState('fake');
+  const [generated, setgenerated] = useState(false)
 
   const style = {
     image: {
@@ -96,6 +97,10 @@ const NewMeme = (props) => {
   };
 
   const classes = useStyles();
+
+  const takeShot = () => {
+    setgenerated(true)
+  }
 
   return (
     <div className={classes.root}>
@@ -190,11 +195,14 @@ const NewMeme = (props) => {
                       // fieldName is the name of the input field
                       // file is the actual file object to send
                       const formData = new FormData();
-                      formData.append('upload_preset','ml_default');
-                      formData.append('folder','/mementor/upload_images');
-                      formData.append('file', file);
+                      formData.append("upload_preset", "ml_default");
+                      formData.append("folder", "/mementor/upload_images");
+                      formData.append("file", file);
                       const request = new XMLHttpRequest();
-                      request.open("POST", "https://api.cloudinary.com/v1_1/toowaste-com/upload");
+                      request.open(
+                        "POST",
+                        "https://api.cloudinary.com/v1_1/toowaste-com/upload"
+                      );
 
                       // Should call the progress method to update the progress to 100% before calling load
                       // Setting computable to false switches the loading indicator to infinite mode
@@ -209,15 +217,14 @@ const NewMeme = (props) => {
                         if (request.status >= 200 && request.status < 300) {
                           // the load method accepts either a string (id) or an object
                           load(request.responseText);
-                          console.log(JSON.parse(request.responseText).url)
-                          setsrc(JSON.parse(request.responseText).url)
-                          setfilepond(false)
+                          console.log(JSON.parse(request.responseText).url);
+                          setsrc(JSON.parse(request.responseText).url);
+                          setfilepond(false);
                         } else {
                           // Can call the error method if something is wrong, should exit after
                           error("oh no");
                         }
                       };
-
 
                       request.send(formData);
 
@@ -264,11 +271,12 @@ const NewMeme = (props) => {
           </Grid>
           <Grid item xs={6}>
             <Paper className={classes.paper}>
-              <FacebookIcon />
-              <InstagramIcon />
-              <TwitterIcon />
-              <PinterestIcon />
-              <LinkedInIcon />
+              {!generated &&
+                <Button color='secondary' variant="contained" onClick={takeShot}>Generate meme</Button>
+              }
+              {generated &&
+              <Share news={shareurl}></Share>
+              }
             </Paper>
           </Grid>
           <Grid item xs>
